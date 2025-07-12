@@ -10,6 +10,7 @@ type CustomerService interface {
 	GetCustomers() ([]models.Customer, error)
 	GetCustomerByID(id uint) (models.Customer, error)
 	UpdateCustomer(customer *models.Customer) error
+	DeleteCustomer(id uint) error
 }
 
 type customerService struct {
@@ -34,4 +35,8 @@ func (s *customerService) GetCustomerByID(id uint) (models.Customer, error) {
 
 func (s *customerService) UpdateCustomer(customer *models.Customer) error {
 	return s.repo.Update(customer)
+}
+
+func (s *customerService) DeleteCustomer(id uint) error {
+	return s.repo.Delete(id)
 }

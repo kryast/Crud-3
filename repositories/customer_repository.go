@@ -10,6 +10,7 @@ type CustomerRepository interface {
 	FindAll() ([]models.Customer, error)
 	FindByID(id uint) (models.Customer, error)
 	Update(customer *models.Customer) error
+	Delete(id uint) error
 }
 
 type customerRepository struct {
@@ -36,4 +37,8 @@ func (r *customerRepository) FindByID(id uint) (models.Customer, error) {
 
 func (r *customerRepository) Update(customer *models.Customer) error {
 	return r.db.Save(customer).Error
+}
+
+func (r *customerRepository) Delete(id uint) error {
+	return r.db.Delete(&models.Customer{}, id).Error
 }
