@@ -9,3 +9,12 @@ GET
 curl http://localhost:8080/customers
 
 curl http://localhost:8080/customers/1
+
+PUT
+curl -X PUT http://localhost:8080/customers/1 \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "Ahmad S.",
+  "email": "ahmad_updated@example.com",
+  "phone": "089998888777"
+}'

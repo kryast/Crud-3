@@ -11,6 +11,7 @@ func SetupRouter(customerHandler *handlers.CustomerHandler) *gin.Engine {
 	r.POST("/customers", customerHandler.CreateCustomer)
 	r.GET("/customers", customerHandler.GetCustomers)
 	r.GET("/customers/:id", customerHandler.GetCustomer)
+	r.PUT("/customers/:id", customerHandler.UpdateCustomer)
 
 	return r
 }

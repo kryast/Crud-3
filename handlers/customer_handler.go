@@ -44,3 +44,18 @@ func (h *CustomerHandler) GetCustomer(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, customer)
 }
+
+func (h *CustomerHandler) UpdateCustomer(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	var customer models.Customer
+	if err := c.ShouldBindJSON(&customer); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	customer.ID = uint(id)
+	if err := h.service.UpdateCustomer(&customer); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Update failed"})
+		return
+	}
+	c.JSON(http.StatusOK, customer)
+}
